@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public SpriteRenderer sr;
+    public Image sr;
     public Color Startcolor;
     public Color Endcolor;
     public float FadeSpeed;
     public float currenttime;
+    public float cutoff;
     public bool fadein;
     public bool dofade;
     public List<GameObject> scenes = new List<GameObject>();
@@ -36,7 +37,7 @@ public class SceneSwitcher : MonoBehaviour
             Fade();
         }
         
-        if(fadein==true &&currenttime>100)
+        if(fadein==true &&currenttime>cutoff)
         {
             fadein = false;
             currenttime = 0;
@@ -48,9 +49,9 @@ public class SceneSwitcher : MonoBehaviour
         if(fadein==true)
         {
             sr.color = Color.Lerp(Startcolor, Endcolor, Time.deltaTime + (currenttime = currenttime + Time.deltaTime) * FadeSpeed);
-            if (currenttime > 100)
+            if (currenttime > cutoff)
             {
-                ChangeScene();
+                NextScene();
             }
         }
 
@@ -67,10 +68,14 @@ public class SceneSwitcher : MonoBehaviour
         fadein = true;
         currenttime = 0;
     }
-    public void ChangeScene()
+    public void NextScene()
     {
         scenes[currentscene].SetActive(false);
         scenes[currentscene+=1].SetActive(true);
     }
-
+    public void PreScene()
+    {
+        scenes[currentscene].SetActive(false);
+        scenes[currentscene -= 1].SetActive(true);
+    }
 }

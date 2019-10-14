@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - FadeImage
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Text
+    uniqueID: 2062837595
+    locked: 0
+  - name: FadeLayer
+    uniqueID: 598686599
     locked: 0
